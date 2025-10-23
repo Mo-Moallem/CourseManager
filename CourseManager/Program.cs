@@ -1,3 +1,6 @@
+using System.Collections.ObjectModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 namespace CourseManager
 {
     internal static class Program
@@ -10,6 +13,11 @@ namespace CourseManager
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+
+            
+            
+            
+
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
         }
