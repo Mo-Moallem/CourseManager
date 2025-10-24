@@ -5,22 +5,13 @@
 //  Created on:      23-Oct-2025 9:44:46 PM
 //  Original author: s202283440
 ///////////////////////////////////////////////////////////
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-
-
-
-using System;
 namespace CourseManager {
 	public class Section {
 
 		private string activity;
 		private Course course;
 		private int crn;
-		private bool gender;
+		private bool female;
 		private string instructor;
 		private Location location;
 		private int secNo;
@@ -28,14 +19,27 @@ namespace CourseManager {
 		private Time time;
 		
 
-		public Section(){
+		
+		public Section(int crn, Course course, int term, string activity, bool female, int secNo, Location location, Time time, string instructor) {
+            activity = this.activity;
+            course = this.course;
+			crn = this.crn;
+			female = this.female;
+			instructor = this.instructor;
+			location = this.location;
+			secNo = this.secNo;
+			term = this.term;
+			time = this.time;
+        }
 
-		}
-
-		~Section(){
-
-		}
-
-	}//end Section
+        internal int GetCrn()
+        {
+			return crn;
+        }
+		internal Time GetTime()
+		{
+			return time;
+        }
+    }//end Section
 
 }//end namespace System

@@ -5,9 +5,11 @@ namespace CourseManager {
 		private string code;
 		private string title;
 
-		public Course(){
-
-		}
+		public Course(string dept, string code, string title){
+			dept = this.dept;
+			code = this.code;
+			title = this.title;
+        }
 
 		
 
