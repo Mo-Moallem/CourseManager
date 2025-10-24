@@ -14,7 +14,7 @@ using System.IO;
 
 
 using System;
-namespace System {
+namespace CourseManager {
 	public class Section {
 
 		private string activity;
@@ -26,9 +26,7 @@ namespace System {
 		private int secNo;
 		private int term;
 		private Time time;
-		public System.Course m_Course;
-		public System.Location m_Location;
-		public System.Time m_Time;
+		
 
 		public Section(){
 

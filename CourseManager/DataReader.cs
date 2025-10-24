@@ -8,21 +8,74 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Globalization;
 using System.IO;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.RegularExpressions;
+using Excel = Microsoft.Office.Interop.Excel;
 
 
 
-namespace System {
+
+namespace CourseManager {
 	public class DataReader {
 
-		public DataReader(){
+        public DataReader(){
 
 		}
 
-		~DataReader(){
+		public static List<Section> Read() {
+            Excel.Application xApp = new Excel.Application();
+            Excel.Workbook xWorkBook = xApp.Workbooks.Open(@"D:\Term Schedule 251.xlsx");
+            Excel.Worksheet xWorksheet = (Excel.Worksheet)xWorkBook.Worksheets[1];
 
-		}
+            Excel.Range usedRng = xWorksheet.UsedRange;
+            int numberOfRows = usedRng.Rows.Count;
+            
+
+
+            int row = 2;
+
+            while (row <= numberOfRows) {
+
+                Excel.Range rng = (Excel.Range)xWorksheet.Cells[row, 1];
+                int term = (int)rng.Value;
+
+                rng = (Excel.Range)xWorksheet.Cells[row, 2];
+                int crn = (int)rng.Value;
+
+                rng = (Excel.Range)xWorksheet.Cells[row, 3];
+                string courseCode = (string)rng.Value;
+
+                rng = (Excel.Range)xWorksheet.Cells[row, 4];
+                string dept = (string)rng.Value;
+
+                rng = (Excel.Range)xWorksheet.Cells[row, 5];
+                string title = (string)rng.Value;
+
+                rng = (Excel.Range)xWorksheet.Cells[row, 6];
+                int activity = (int)rng.Value;
+                
+                rng = (Excel.Range)xWorksheet.Cells[row, 7];
+                string daysString = (string)rng.Value;
+                
+
+
+
+
+
+
+                
+
+                
+
+            }
+
+            return [];
+
+
+        } 
 
 	}//end DataReader
 

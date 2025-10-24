@@ -13,7 +13,7 @@ using System.IO;
 
 
 
-namespace System {
+namespace CourseManager {
 	public class Location {
 
 		private int buildingNo;
