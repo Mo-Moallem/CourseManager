@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+
 namespace CourseManager
 {
     public partial class Form1 : Form
@@ -13,21 +16,6 @@ namespace CourseManager
         }
 
         private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
@@ -49,7 +37,9 @@ namespace CourseManager
 
         private void sundayBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("sundayBtn Clicked");
+            List<int> crrns = getCrns();
+            string message = "Button 1 Clicked\nCRNs: " + string.Join(", ", crrns);
+            MessageBox.Show(message);
         }
         private void mondayBtn_Click(object sender, EventArgs e)
         {
@@ -68,6 +58,20 @@ namespace CourseManager
         private void trusdayBtn_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Button 5 Clicked");
+        }
+        public List<int> getCrns()
+        {
+            List<int> crns = new List<int>();
+            string[] crnsStr = crnsBox.Text.Split(' ');
+            foreach (string crn in crnsStr)
+            {
+                if (int.TryParse(crn.Trim(), out int crnInt))
+                {
+                    crns.Add(crnInt);
+                }
+            }
+           
+            return crns;
         }
     }
 }

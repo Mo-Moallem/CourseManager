@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             label2 = new Label();
             label1 = new Label();
-            textBox1 = new TextBox();
+            crnsBox = new TextBox();
             sundayBtn = new Button();
             mondayBtn = new Button();
             tuesdayBtn = new Button();
@@ -74,13 +74,13 @@
             label1.Text = "Enter Student CRN Numbers";
             label1.Click += label1_Click;
             // 
-            // textBox1
+            // crnsBox
             // 
-            textBox1.Location = new Point(186, 4);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(678, 23);
-            textBox1.TabIndex = 1;
+            crnsBox.Location = new Point(186, 4);
+            crnsBox.Margin = new Padding(3, 2, 3, 2);
+            crnsBox.Name = "crnsBox";
+            crnsBox.Size = new Size(678, 23);
+            crnsBox.TabIndex = 1;
             // 
             // sundayBtn
             // 
@@ -170,7 +170,7 @@
             Controls.Add(richTextBox1);
             Controls.Add(panel1);
             Controls.Add(tuesdayBtn);
-            Controls.Add(textBox1);
+            Controls.Add(crnsBox);
             Controls.Add(wednesdayBtn);
             Controls.Add(label1);
             Controls.Add(mondayBtn);
@@ -188,7 +188,7 @@
         #endregion
 
         private Label label1;
-        private TextBox textBox1;
+        private TextBox crnsBox;
         private Label label2;
         private Panel panel1;
         private Button sundayBtn;
