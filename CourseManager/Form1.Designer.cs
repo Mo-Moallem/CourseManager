@@ -33,11 +33,11 @@
             label2 = new Label();
             label1 = new Label();
             textBox1 = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
+            sundayBtn = new Button();
+            mondayBtn = new Button();
+            tuesdayBtn = new Button();
+            wednesdayBtn = new Button();
+            trusdayBtn = new Button();
             label3 = new Label();
             richTextBox1 = new RichTextBox();
             panel1 = new Panel();
@@ -49,119 +49,133 @@
             panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
             panel1.Controls.Add(label2);
             panel1.ImeMode = ImeMode.NoControl;
-            panel1.Location = new Point(12, 39);
+            panel1.Location = new Point(10, 29);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(624, 598);
+            panel1.Size = new Size(546, 448);
             panel1.TabIndex = 3;
             panel1.Paint += panel1_Paint;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(113, 202);
+            label2.Location = new Point(99, 152);
             label2.Name = "label2";
-            label2.Size = new Size(0, 20);
+            label2.Size = new Size(0, 15);
             label2.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(10, 7);
             label1.Name = "label1";
-            label1.Size = new Size(195, 20);
+            label1.Size = new Size(157, 15);
             label1.TabIndex = 0;
             label1.Text = "Enter Student CRN Numbers";
             label1.Click += label1_Click;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(213, 6);
+            textBox1.Location = new Point(186, 4);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(774, 27);
+            textBox1.Size = new Size(678, 23);
             textBox1.TabIndex = 1;
             // 
-            // button1
+            // sundayBtn
             // 
-            button1.Location = new Point(791, 73);
-            button1.Name = "button1";
-            button1.Size = new Size(45, 29);
-            button1.TabIndex = 5;
-            button1.Text = "T";
-            button1.UseVisualStyleBackColor = true;
+            sundayBtn.Location = new Point(692, 55);
+            sundayBtn.Margin = new Padding(3, 2, 3, 2);
+            sundayBtn.Name = "sundayBtn";
+            sundayBtn.Size = new Size(39, 22);
+            sundayBtn.TabIndex = 5;
+            sundayBtn.Text = "T";
+            sundayBtn.UseVisualStyleBackColor = true;
+            sundayBtn.Click += tuesdayBtn_Click;
             // 
-            // button2
+            // mondayBtn
             // 
-            button2.Location = new Point(842, 73);
-            button2.Name = "button2";
-            button2.Size = new Size(45, 29);
-            button2.TabIndex = 5;
-            button2.Text = "W";
-            button2.UseVisualStyleBackColor = true;
+            mondayBtn.Location = new Point(737, 55);
+            mondayBtn.Margin = new Padding(3, 2, 3, 2);
+            mondayBtn.Name = "mondayBtn";
+            mondayBtn.Size = new Size(39, 22);
+            mondayBtn.TabIndex = 5;
+            mondayBtn.Text = "W";
+            mondayBtn.UseVisualStyleBackColor = true;
+            mondayBtn.Click += wednesdayBtn_Click;
             // 
-            // button3
+            // tuesdayBtn
             // 
-            button3.Location = new Point(893, 73);
-            button3.Name = "button3";
-            button3.Size = new Size(45, 29);
-            button3.TabIndex = 5;
-            button3.Text = "R";
-            button3.UseVisualStyleBackColor = true;
+            tuesdayBtn.Location = new Point(781, 55);
+            tuesdayBtn.Margin = new Padding(3, 2, 3, 2);
+            tuesdayBtn.Name = "tuesdayBtn";
+            tuesdayBtn.Size = new Size(39, 22);
+            tuesdayBtn.TabIndex = 5;
+            tuesdayBtn.Text = "R";
+            tuesdayBtn.UseVisualStyleBackColor = true;
+            tuesdayBtn.Click += trusdayBtn_Click;
             // 
-            // button4
+            // wednesdayBtn
             // 
-            button4.Location = new Point(740, 73);
-            button4.Name = "button4";
-            button4.Size = new Size(45, 29);
-            button4.TabIndex = 5;
-            button4.Text = "M";
-            button4.UseVisualStyleBackColor = true;
+            wednesdayBtn.Location = new Point(648, 55);
+            wednesdayBtn.Margin = new Padding(3, 2, 3, 2);
+            wednesdayBtn.Name = "wednesdayBtn";
+            wednesdayBtn.Size = new Size(39, 22);
+            wednesdayBtn.TabIndex = 5;
+            wednesdayBtn.Text = "M";
+            wednesdayBtn.UseVisualStyleBackColor = true;
+            wednesdayBtn.Click += mondayBtn_Click;
             // 
-            // button5
+            // trusdayBtn
             // 
-            button5.Location = new Point(689, 73);
-            button5.Name = "button5";
-            button5.Size = new Size(45, 29);
-            button5.TabIndex = 5;
-            button5.Text = "U";
-            button5.UseVisualStyleBackColor = true;
+            trusdayBtn.Location = new Point(603, 55);
+            trusdayBtn.Margin = new Padding(3, 2, 3, 2);
+            trusdayBtn.Name = "trusdayBtn";
+            trusdayBtn.Size = new Size(39, 22);
+            trusdayBtn.TabIndex = 5;
+            trusdayBtn.Text = "U";
+            trusdayBtn.UseVisualStyleBackColor = true;
+            trusdayBtn.Click += sundayBtn_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(785, 39);
+            label3.Location = new Point(687, 29);
             label3.Name = "label3";
-            label3.Size = new Size(55, 20);
+            label3.Size = new Size(44, 15);
             label3.TabIndex = 6;
             label3.Text = "Results";
             label3.Click += label3_Click;
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(642, 108);
+            richTextBox1.Location = new Point(562, 81);
+            richTextBox1.Margin = new Padding(3, 2, 3, 2);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new Size(345, 529);
+            richTextBox1.Size = new Size(302, 398);
             richTextBox1.TabIndex = 7;
             richTextBox1.Text = "Hello, World!";
             richTextBox1.TextChanged += richTextBox1_TextChanged;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(996, 649);
+            ClientSize = new Size(872, 487);
             Controls.Add(label3);
-            Controls.Add(button1);
+            Controls.Add(sundayBtn);
             Controls.Add(richTextBox1);
             Controls.Add(panel1);
-            Controls.Add(button3);
+            Controls.Add(tuesdayBtn);
             Controls.Add(textBox1);
-            Controls.Add(button4);
+            Controls.Add(wednesdayBtn);
             Controls.Add(label1);
-            Controls.Add(button2);
-            Controls.Add(button5);
+            Controls.Add(mondayBtn);
+            Controls.Add(trusdayBtn);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -177,11 +191,11 @@
         private TextBox textBox1;
         private Label label2;
         private Panel panel1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
+        private Button sundayBtn;
+        private Button mondayBtn;
+        private Button tuesdayBtn;
+        private Button wednesdayBtn;
+        private Button trusdayBtn;
         private Label label3;
         private RichTextBox richTextBox1;
     }

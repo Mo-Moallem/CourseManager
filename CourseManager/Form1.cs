@@ -46,5 +46,28 @@ namespace CourseManager
         {
 
         }
+
+        private void sundayBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("sundayBtn Clicked");
+        }
+        private void mondayBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Button 2 Clicked");
+        }
+        private void tuesdayBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Button 3 Clicked");
+        }
+
+        private void wednesdayBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Button 4 Clicked");
+        }
+        
+        private void trusdayBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Button 5 Clicked");
+        }
     }
 }

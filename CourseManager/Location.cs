@@ -16,13 +16,13 @@ using System.IO;
 namespace CourseManager {
 	public class Location {
 
-		private int buildingNo;
-		private Point point;
+		private Building building;
 		private int roomNo;
 
-		public Location(){
-
-		}
+		public Location(Building building,int roomNo){
+			this.building = building;
+			this.roomNo = roomNo;
+        }
 
 
 	}//end Location
