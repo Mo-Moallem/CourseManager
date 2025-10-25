@@ -17,9 +17,9 @@ namespace CourseManager {
 	public class Location {
 
 		private Building building;
-		private int roomNo;
+		private string? roomNo;
 
-		public Location(Building building,int roomNo){
+		public Location(Building building,string? roomNo){
 			this.building = building;
 			this.roomNo = roomNo;
         }

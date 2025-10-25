@@ -12,7 +12,7 @@ namespace CourseManager {
 		private Course course;
 		private int crn;
 		private bool female;
-		private string instructor;
+		private string? instructor;
 		private Location location;
 		private int secNo;
 		private int term;
@@ -20,16 +20,16 @@ namespace CourseManager {
 		
 
 		
-		public Section(int crn, Course course, int term, string activity, bool female, int secNo, Location location, Time time, string instructor) {
-            activity = this.activity;
-            course = this.course;
-			crn = this.crn;
-			female = this.female;
-			instructor = this.instructor;
-			location = this.location;
-			secNo = this.secNo;
-			term = this.term;
-			time = this.time;
+		public Section(int crn, Course course, int term, string activity, bool female, int secNo, Location location, Time time, string? instructor) {
+			this.crn = crn;
+			this.course = course;
+			this.term = term;
+			this.activity = activity;
+			this.female = female;
+			this.secNo = secNo;
+			this.location = location;
+			this.time = time;
+			this.instructor = instructor;
         }
 
         internal int GetCrn()

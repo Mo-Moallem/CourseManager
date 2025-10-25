@@ -9,9 +9,9 @@ namespace CourseManager
 {
     public class Building
     {
-        private int buildingNo;
+        private string? buildingNo;
         private Point point;
-        public Building(int buildingNo)
+        public Building(string? buildingNo)
         {
             this.buildingNo = buildingNo;
             this.point = point;
