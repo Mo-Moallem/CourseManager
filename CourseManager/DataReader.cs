@@ -20,7 +20,7 @@ namespace CourseManager {
 
 		}
 
-        public static Dictionary<int, List<Section>> Read()
+        public static void ReadTo(SectionsManager manager)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace CourseManager {
                 Excel.Range usedRng = xWorksheet.UsedRange;
                 int numberOfRows = usedRng.Rows.Count;
 
-                Dictionary<int, List<Section>> sections = new Dictionary<int, List<Section>>();
+                
 
                 int row = 2;
 
@@ -52,13 +52,7 @@ namespace CourseManager {
 
                     rng = xWorksheet.Cells[row, 5];
                     string secNoString = (string)rng.Value;
-                    bool female = false;
-                    if (secNoString.StartsWith("F"))
-                    {
-                        secNoString = secNoString[1..];
-                        female = true;
-                    }
-                    int secNo = int.Parse(secNoString);
+                    
 
                     rng = xWorksheet.Cells[row, 6];
                     string title = (string)rng.Value;
@@ -75,14 +69,8 @@ namespace CourseManager {
                     object vStart = ((Excel.Range)xWorksheet.Cells[row, 9]).Value2;
                     object vEnd = ((Excel.Range)xWorksheet.Cells[row, 10]).Value2;
 
-                    Time? time = BuildTimeOrNull(vStart, vEnd, daysString);
-                    // pass `time` to Section (make Section accept Time?),
-                    // or skip the row if time is null.
-
-
-
                     rng = xWorksheet.Cells[row, 11];
-                    string? buidingNo = (string)rng.Value;
+                    string? buildingNo = (string)rng.Value;
 
                     rng = xWorksheet.Cells[row, 12];
                     string? roomNo = (string)rng.Value;
@@ -90,25 +78,16 @@ namespace CourseManager {
                     rng = xWorksheet.Cells[row, 13];
                     string? instructor = (string)rng.Value;
 
-                    Course course = new Course(dept, courseCode, title);
-                    Building building = new Building(buidingNo);
-                    Location location = new Location(building, roomNo);
-                    Section section = new Section(crn, course, term, activity, female, secNo, location, time, instructor);
-                    if (!sections.TryGetValue(crn, out var list))
-                    {
-                        list = new List<Section>();
-                        sections[crn] = list;
-                    }
-                    list.Add(section);
+                    manager.AddSection(term, crn, courseCode, dept, secNoString, title, activity, daysString, vStart, vEnd, buildingNo, roomNo, instructor);
+                  
                     row++;
                 }
-                return sections;
+
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error " + ex.StackTrace);
-                return new Dictionary<int, List<Section>>();
             }
             
             
@@ -116,43 +95,7 @@ namespace CourseManager {
         // Put these in DataReader (or a utils class)
 
         // Parse "0800" or Excel OADate (double). Returns false if null/empty/unparseable.
-        private static bool TryParseTime(object? v, out TimeOnly t)
-        {
-            t = default;
-            if (v is null) return false;
-
-            if (v is double d) { t = TimeOnly.FromDateTime(DateTime.FromOADate(d)); return true; }
-
-            var s = Convert.ToString(v)?.Trim();
-            if (string.IsNullOrEmpty(s)) return false;
-
-            // exact "HHmm" like 0800
-            if (s.Length == 4 &&
-                int.TryParse(s.AsSpan(0, 2), out var hh) &&
-                int.TryParse(s.AsSpan(2, 2), out var mm))
-            { t = new TimeOnly(hh, mm); return true; }
-
-            // fallback (e.g., "8:00", "8:00 AM")
-            return TimeOnly.TryParse(s, out t);
-        }
-
-
-
-
-        // Build Time? using your rule: if start is null -> null; if end is null -> end = start
-        private static Time? BuildTimeOrNull(object? vStart, object? vEnd, string daysString)
-        {
-            if (!TryParseTime(vStart, out var start))
-                return null;
-
-            if (!TryParseTime(vEnd, out var end))
-                end = start; // your rule
-
-            // If your Time ctor enforces end > start, either relax it or nudge by a minute:
-            // if (end <= start) end = start.AddMinutes(1);
-
-            return new Time(daysString, start, end);
-        }
+        
 
 
     }//end DataReader

@@ -13,14 +13,14 @@ namespace CourseManager {
 		private int crn;
 		private bool female;
 		private string? instructor;
-		private Location location;
+		private Location? location;
 		private int secNo;
 		private int term;
-		private Time time;
+		private Time? time;
 		
 
 		
-		public Section(int crn, Course course, int term, string activity, bool female, int secNo, Location location, Time time, string? instructor) {
+		public Section(int crn, Course course, int term, string activity, bool female, int secNo, Location? location, Time? time, string? instructor) {
 			this.crn = crn;
 			this.course = course;
 			this.term = term;

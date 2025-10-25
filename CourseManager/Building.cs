@@ -17,6 +17,11 @@ namespace CourseManager
             this.point = point;
         }
 
+        internal string? GetBuildingNo()
+        {
+            return this.buildingNo;
+        }
+
         private Point GetPoint(int buildingNo)
         {
             return new Point(0,0);

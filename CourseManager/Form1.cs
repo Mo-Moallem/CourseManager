@@ -15,7 +15,8 @@ namespace CourseManager
         {
             InitializeComponent();
             sectionsManager = new SectionsManager();
-            currentSections = new List<Section>();
+            DataReader.ReadTo(sectionsManager);
+
         }
 
         private void label1_Click(object sender, EventArgs e)
