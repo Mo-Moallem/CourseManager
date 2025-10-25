@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace CourseManager
 {
@@ -14,7 +15,8 @@ namespace CourseManager
         {
             List<Section> result = new List<Section>();
             foreach (int crn in crns)
-            {
+            {   
+                
                 if (sections.TryGetValue(crn, out var list))
                 {
                     result.AddRange(list);
@@ -29,7 +31,7 @@ namespace CourseManager
 
         private List<Section> getSectionsByDay(char day, List<int> crns) {
             return getSectionsByCrn(crns)
-                    .Where(s => s.GetTime()?.OccursOn(day) == true) // null-safe
+                    .Where(s => s.GetTime().OccursOn(day) == true) // null-safe
                     .ToList();
 
         }
@@ -37,11 +39,23 @@ namespace CourseManager
         {
             return getSectionsByDay(day, crns)
                 .OrderBy(s => s.GetTime())
-                .ThenBy(s => s.GetTime())
                 .ToList();
         }
+        
 
+        public Course[] GetCoursesFromSections(List<Section> currentSections)
+        {
+            if (currentSections == null || currentSections.Count == 0)
+            {
+                return Array.Empty<Course>();
+            }
 
+            // Extract unique courses using LINQ
+            return currentSections
+                .Select(section => section.GetCourse())
+                .Distinct()
+                .ToArray();
+        }
     }
 
     

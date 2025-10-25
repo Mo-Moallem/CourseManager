@@ -32,14 +32,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             label2 = new Label();
             label1 = new Label();
-            crnsBox = new TextBox();
+            crnsTextBox = new TextBox();
             sundayBtn = new Button();
             mondayBtn = new Button();
             tuesdayBtn = new Button();
             wednesdayBtn = new Button();
             trusdayBtn = new Button();
             label3 = new Label();
-            richTextBox1 = new RichTextBox();
+            resultTextBox = new RichTextBox();
             panel1 = new Panel();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -74,13 +74,13 @@
             label1.Text = "Enter Student CRN Numbers";
             label1.Click += label1_Click;
             // 
-            // crnsBox
+            // crnsTextBox
             // 
-            crnsBox.Location = new Point(186, 4);
-            crnsBox.Margin = new Padding(3, 2, 3, 2);
-            crnsBox.Name = "crnsBox";
-            crnsBox.Size = new Size(678, 23);
-            crnsBox.TabIndex = 1;
+            crnsTextBox.Location = new Point(186, 4);
+            crnsTextBox.Margin = new Padding(3, 2, 3, 2);
+            crnsTextBox.Name = "crnsTextBox";
+            crnsTextBox.Size = new Size(678, 23);
+            crnsTextBox.TabIndex = 1;
             // 
             // sundayBtn
             // 
@@ -147,16 +147,16 @@
             label3.Text = "Results";
             label3.Click += label3_Click;
             // 
-            // richTextBox1
+            // resultTextBox
             // 
-            richTextBox1.Location = new Point(562, 81);
-            richTextBox1.Margin = new Padding(3, 2, 3, 2);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new Size(302, 398);
-            richTextBox1.TabIndex = 7;
-            richTextBox1.Text = "Hello, World!";
-            richTextBox1.TextChanged += richTextBox1_TextChanged;
+            resultTextBox.Location = new Point(562, 81);
+            resultTextBox.Margin = new Padding(3, 2, 3, 2);
+            resultTextBox.Name = "resultTextBox";
+            resultTextBox.ReadOnly = true;
+            resultTextBox.Size = new Size(302, 398);
+            resultTextBox.TabIndex = 7;
+            resultTextBox.Text = "Hello, World!";
+            resultTextBox.TextChanged += richTextBox1_TextChanged;
             // 
             // Form1
             // 
@@ -167,10 +167,10 @@
             ClientSize = new Size(872, 487);
             Controls.Add(label3);
             Controls.Add(sundayBtn);
-            Controls.Add(richTextBox1);
+            Controls.Add(resultTextBox);
             Controls.Add(panel1);
             Controls.Add(tuesdayBtn);
-            Controls.Add(crnsBox);
+            Controls.Add(crnsTextBox);
             Controls.Add(wednesdayBtn);
             Controls.Add(label1);
             Controls.Add(mondayBtn);
@@ -188,7 +188,7 @@
         #endregion
 
         private Label label1;
-        private TextBox crnsBox;
+        private TextBox crnsTextBox;
         private Label label2;
         private Panel panel1;
         private Button sundayBtn;
@@ -197,6 +197,6 @@
         private Button wednesdayBtn;
         private Button trusdayBtn;
         private Label label3;
-        private RichTextBox richTextBox1;
+        private RichTextBox resultTextBox;
     }
 }

@@ -1,18 +1,24 @@
 namespace CourseManager {
-	public class Course {
+    public class Course
+    {
 
-		private string dept;
-		private string code;
-		private string title;
+        private string dept;
+        private string code;
+        private string title;
 
-		public Course(string dept, string code, string title){
+        public Course(string dept, string code, string title)
+        {
             this.dept = dept;
             this.code = code;
             this.title = title;
         }
-
-		
-
-	}//end Course
-
+        public string GetCourseCode()
+        {
+            return $"{dept} {code}";
+        }
+        public string GetCourseTitle()
+        {
+            return title;
+        }
+    }
 }//end namespace System

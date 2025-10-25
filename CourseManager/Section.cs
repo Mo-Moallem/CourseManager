@@ -40,6 +40,9 @@ namespace CourseManager {
 		{
 			return time;
         }
+		public Course GetCourse() {
+			return course;
+        }
     }//end Section
 
 }//end namespace System
