@@ -130,7 +130,7 @@ namespace CourseManager
             sb.AppendLine();
             foreach (var section in sections)
             {
-                sb.AppendLine($"{section.GetCourse().GetCourseCode()} - {section.GetType()}");
+                sb.AppendLine($"{section.GetCourse().GetCourseCode()} {section.GetTime().GetStart()}");
                 
             }
 

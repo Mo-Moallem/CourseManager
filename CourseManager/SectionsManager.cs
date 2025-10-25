@@ -31,14 +31,14 @@ namespace CourseManager
 
         private List<Section> getSectionsByDay(char day, List<int> crns) {
             return getSectionsByCrn(crns)
-                    .Where(s => s.GetTime().OccursOn(day) == true) // null-safe
+                    .Where(s => s.GetTime().OccursOn(day) == true)
                     .ToList();
 
         }
         public List<Section> GetSectionsInOrder(char day, List<int> crns)
         {
             return getSectionsByDay(day, crns)
-                .OrderBy(s => s.GetTime())  // Order explicitly by start time
+                .OrderBy(s => s.GetTime())  
                 .ToList();
         }
         
