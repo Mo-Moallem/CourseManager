@@ -14,7 +14,7 @@ namespace CourseManager {
         }
         public string GetCourseCode()
         {
-            return $"{dept} {code}";
+            return code;
         }
         public string GetCourseTitle()
         {

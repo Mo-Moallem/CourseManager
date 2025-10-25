@@ -15,29 +15,41 @@ namespace CourseManager
         {
             sections = new Dictionary<int, List<Section>>();
             buildings = new Dictionary<string, Building>();
+            generateBuildings();
             locations = new Dictionary<string, Location>();
             courses = new Dictionary<string, Course>();
         }
-        public void LoadData()
+
+
+        private void generateBuildings()
         {
-            DataReader.ReadTo(this); // Pass 'this' for callbacks
+            buildings["22"] = new Building("22", new Point(370, 320));
+            buildings["24"] = new Building("24", new Point(400, 390));
+            buildings["0"] = new Building("0", new Point(240, 240));
+            buildings["7"] = new Building("7", new Point(85, 130));
+            buildings["5"] = new Building("5", new Point(120, 105));
+            buildings["63"] = new Building("63", new Point(120, 50));
+            buildings["59"] = new Building("59", new Point(340, 90));
+            buildings["4"] = new Building("4", new Point(150, 145));
+            buildings["6"] = new Building("6", new Point(125, 165));
+            buildings["42"] = new Building("42", new Point(475, 175));
+            buildings["76"] = new Building("76", new Point(350, 320));
+            buildings["28"] = new Building("28", new Point(280, 265));
+            buildings["9"] = new Building("9", new Point(140, 255));
+            buildings["57"] = new Building("57", new Point(265, 185));
+            buildings["58"] = new Building("58", new Point(305, 200));
+            buildings["78"] = new Building("78", new Point(470, 325));
+            buildings["3"] = new Building("3", new Point(105, 155));
+            buildings["DTV248"] = new Building("DTV248", new Point(185, 260));
+            buildings["1"] = new Building("1", new Point(95, 180));
+            buildings["75"] = new Building("75", new Point(95, 75));
+            buildings["39"] = new Building("39", new Point(420, 140));
+            buildings["407"] = new Building("407", new Point(450, 95));
+            buildings["11"] = new Building("11", new Point(245, 350));
+
+
         }
 
-        public Building? GetOrCreateBuilding(string buildingNo)
-        {
-            // Handle null or empty building numbers
-            if (string.IsNullOrEmpty(buildingNo))
-            {
-                return null;
-            }
-
-            if(!buildings.TryGetValue(buildingNo, out var building))
-            {
-                building = new Building(buildingNo);
-                buildings[buildingNo] = building;
-            }
-            return building;
-        }
 
         public Location? GetOrCreateLocation(Building? building, string? roomNo)
         {
@@ -79,8 +91,10 @@ namespace CourseManager
 
 
             Course course = GetOrCreateCourse(dept, courseCode, title);
-            Building building = GetOrCreateBuilding(buildingNo);
-            Location location = GetOrCreateLocation(building, roomNo);
+            Building? building = (!string.IsNullOrEmpty(buildingNo) && buildings.ContainsKey(buildingNo))
+                ? buildings[buildingNo]
+                : null;
+            Location? location = GetOrCreateLocation(building, roomNo);
             Time? time = BuildTimeOrNull(vStart, vEnd, daysString);
             Section section = new Section(crn, course, term, activity, female, secNo, location, time, instructor);
             
@@ -132,7 +146,7 @@ namespace CourseManager
             return new Time(daysString, start, end);
         }
 
-        private List<Section> getSectionsByCrn(List<int> crns)
+        public List<Section> getSectionsByCrn(List<int> crns)
         {
             List<Section> result = new List<Section>();
             foreach (int crn in crns)
@@ -150,15 +164,24 @@ namespace CourseManager
             return result;
         }
 
-        private List<Section> getSectionsByDay(char day, List<int> crns) {
-            return getSectionsByCrn(crns)
+        public List<Section> getSectionsByDay(char day, List<int> crns, List<Section> sectionsByCrn)  {
+
+            foreach (var section in sectionsByCrn)
+            {
+                if (section.GetTime() == null)
+                {
+                    throw new ArgumentException($"Section with CRN: {section.GetCrn()} does not have time");
+                }
+            }
+
+            return sectionsByCrn
                     .Where(s => s.GetTime().OccursOn(day) == true)
                     .ToList();
 
         }
-        public List<Section> GetSectionsInOrder(char day, List<int> crns)
+        public List<Section> GetSectionsInOrder(List<int> crns, List<Section> sectionsByDay)
         {
-            return getSectionsByDay(day, crns)
+            return sectionsByDay
                 .OrderBy(s => s.GetTime())  
                 .ToList();
         }

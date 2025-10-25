@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Panel panel1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            MapPanel = new Panel();
             label2 = new Label();
             label1 = new Label();
             crnsTextBox = new TextBox();
@@ -40,21 +40,21 @@
             trusdayBtn = new Button();
             label3 = new Label();
             resultTextBox = new RichTextBox();
-            panel1 = new Panel();
-            panel1.SuspendLayout();
+            MapPanel.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // MapPanel
             // 
-            panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
-            panel1.Controls.Add(label2);
-            panel1.ImeMode = ImeMode.NoControl;
-            panel1.Location = new Point(10, 29);
-            panel1.Margin = new Padding(3, 2, 3, 2);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(546, 448);
-            panel1.TabIndex = 3;
-            panel1.Paint += panel1_Paint;
+            MapPanel.BackgroundImage = (Image)resources.GetObject("MapPanel.BackgroundImage");
+            MapPanel.BorderStyle = BorderStyle.FixedSingle;
+            MapPanel.Controls.Add(label2);
+            MapPanel.ImeMode = ImeMode.NoControl;
+            MapPanel.Location = new Point(10, 42);
+            MapPanel.Margin = new Padding(3, 2, 3, 2);
+            MapPanel.Name = "MapPanel";
+            MapPanel.Size = new Size(546, 434);
+            MapPanel.TabIndex = 3;
+            MapPanel.Paint += MapPanel_Paint;
             // 
             // label2
             // 
@@ -168,7 +168,7 @@
             Controls.Add(label3);
             Controls.Add(sundayBtn);
             Controls.Add(resultTextBox);
-            Controls.Add(panel1);
+            Controls.Add(MapPanel);
             Controls.Add(tuesdayBtn);
             Controls.Add(crnsTextBox);
             Controls.Add(wednesdayBtn);
@@ -179,8 +179,8 @@
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            MapPanel.ResumeLayout(false);
+            MapPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -190,7 +190,7 @@
         private Label label1;
         private TextBox crnsTextBox;
         private Label label2;
-        private Panel panel1;
+        private Panel MapPanel;
         private Button sundayBtn;
         private Button mondayBtn;
         private Button tuesdayBtn;

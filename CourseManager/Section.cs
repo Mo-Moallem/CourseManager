@@ -5,6 +5,7 @@
 //  Created on:      23-Oct-2025 9:44:46 PM
 //  Original author: s202283440
 ///////////////////////////////////////////////////////////
+
 namespace CourseManager {
 	public class Section {
 
@@ -42,6 +43,11 @@ namespace CourseManager {
         }
 		public Course GetCourse() {
 			return course;
+        }
+
+        public Location GetLocation()
+        {
+			return location;
         }
     }//end Section
 

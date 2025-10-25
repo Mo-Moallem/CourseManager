@@ -9,7 +9,7 @@ namespace CourseManager
     {
         private SectionsManager sectionsManager;
         private List<Section> currentSections;
-        private Graphics mapGraphics;
+
 
         public Form1()
         {
@@ -27,15 +27,6 @@ namespace CourseManager
         private void label3_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            // Redraw the path when panel repaints
-            //if (currentSections.Any())
-            //{
-            //    DrawPathOnMap(e.Graphics);
-            //}
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -88,10 +79,23 @@ namespace CourseManager
                     MessageBox.Show("Please enter CRN numbers.", "No CRNs", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                List<Section> sectionsByCrn = sectionsManager.getSectionsByCrn(crns);
+                List<Section> sectionsByDay;
 
+                sectionsByDay = sectionsManager.getSectionsByDay(day, crns, sectionsByCrn);
+                currentSections = sectionsManager.GetSectionsInOrder(crns, sectionsByDay);
+                List<Point> points = new List<Point>();
+                foreach (Section section in currentSections)
+                {
+                    Point point = section.GetLocation().GetBuilding().GetPoint();
+                    points.Add(point);
+                }
                 
-                currentSections = sectionsManager.GetSectionsInOrder(day, crns);
-                Course[] courses = sectionsManager.GetCoursesFromSections(currentSections);
+
+               
+                
+                
+                Course[] courses = sectionsManager.GetCoursesFromSections(sectionsByCrn);
 
 
                 if (currentSections.Count == 0)
@@ -102,10 +106,10 @@ namespace CourseManager
                 }
 
                 
-                DisplayResults(GetDayName(day), courses, 3, 4,currentSections);
-
+                DisplayResults(GetDayName(day), courses, (sectionsByDay.Select(s => s.GetLocation().GetBuilding()).Distinct()).Count(), (int) CalculateTotalDistance(points) , currentSections);
+                
                 // Draw the path on the map
-                //panel1.Invalidate(); // Trigger panel1_Paint
+                drawPathOnMap(points);
             }
             catch (ArgumentException ex)
             {
@@ -127,7 +131,7 @@ namespace CourseManager
                 sb.AppendLine($"{i+1}- {courses[i].GetCourseCode()} : {courses[i].GetCourseTitle()}");
             }
             sb.AppendLine($"Number of Different Buildings = {numberOfDifBuildings}");
-            sb.AppendLine($"Distance Traveled = {totalDistance}");
+            sb.AppendLine($"Distance Traveled = {totalDistance} m");
             sb.AppendLine();
             foreach (var section in sections)
             {
@@ -138,17 +142,54 @@ namespace CourseManager
             resultTextBox.Text = sb.ToString();
         }
 
-        private object GetUniqueBuildingsCount(List<Section> currentSections)
+
+
+        private List<Point> pathPoints = null;
+
+        private void drawPathOnMap(List<Point> points)
         {
-            return 3;
+            pathPoints = points;
+            MapPanel.Invalidate(); // Triggers Paint event
         }
 
-        private double CalculateTotalDistance(List<Section> sections)
+        // Add this event handler to your MapPanel
+        private void MapPanel_Paint(object sender, PaintEventArgs e)
         {
-            // You'll need to implement distance calculation between buildings
-            // This is a placeholder
-            return 780; // Example value in meters
+            if (pathPoints == null)
+                return;
+
+            Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            for (int i = 0; i < pathPoints.Count - 1; i++)
+            {
+                DrawAnArrow(pathPoints[i], pathPoints[i + 1], g);
+            }
+            for (int i = 0; i < pathPoints.Count; i++)
+            {
+                DrawAPoint(pathPoints[i], g, (i + 1).ToString());
+            }
         }
+
+        private void DrawAnArrow(Point p1, Point p2, Graphics g)
+        {
+            Pen arrowPen = new Pen(Color.Black, 2); ;
+            g.DrawLine(arrowPen, p1, p2);
+        }
+        private void DrawAPoint(Point point, Graphics g, string value) {
+            Pen circlePen = new Pen(Color.Black, 2);
+            Brush circleBrush = new SolidBrush(Color.Yellow);
+            Brush txtBrush = new SolidBrush(Color.Black);
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;       
+            sf.LineAlignment = StringAlignment.Center;    
+
+            g.FillEllipse(circleBrush, point.X - 15, point.Y - 15, 30, 30);
+            g.DrawEllipse(circlePen, point.X - 15, point.Y - 15, 30, 30);
+            g.DrawString(value, MapPanel.Font, txtBrush, point, sf);
+
+        }
+
 
         private string GetDayName(char day)
         {
@@ -179,5 +220,25 @@ namespace CourseManager
 
             return crns;
         }
+        private double CalculateTotalDistance(List<Point> points)
+        {
+            if (points.Count < 2)
+                return 0;
+
+            double totalDistance = 0;
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                totalDistance += CalculateDistance(points[i], points[i + 1]);
+            }
+            return totalDistance;
+        }
+
+        private double CalculateDistance(Point p1, Point p2)
+        {
+            int dx = p2.X - p1.X;
+            int dy = p2.Y - p1.Y;
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
+
     }
 }

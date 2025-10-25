@@ -11,7 +11,7 @@ namespace CourseManager
     {
         private string? buildingNo;
         private Point point;
-        public Building(string? buildingNo)
+        public Building(string? buildingNo, Point point)
         {
             this.buildingNo = buildingNo;
             this.point = point;
@@ -22,9 +22,9 @@ namespace CourseManager
             return this.buildingNo;
         }
 
-        private Point GetPoint(int buildingNo)
+        public Point GetPoint()
         {
-            return new Point(0,0);
+            return this.point;
         }
     }
 }

@@ -24,6 +24,10 @@ namespace CourseManager {
 			this.roomNo = roomNo;
         }
 
+		public Building GetBuilding() {
+			return this.building;
+		}
+
 
 	}//end Location
 
