@@ -38,7 +38,7 @@ namespace CourseManager
         public List<Section> GetSectionsInOrder(char day, List<int> crns)
         {
             return getSectionsByDay(day, crns)
-                .OrderBy(s => s.GetTime())
+                .OrderBy(s => s.GetTime())  // Order explicitly by start time
                 .ToList();
         }
         

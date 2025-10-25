@@ -97,6 +97,9 @@ namespace CourseManager {
             for (int i = 0; i < 7; i++) { if (other.days[i]) m2 |= 1 << i; }
             return m1.CompareTo(m2);
         }
+        public TimeOnly GetStart() {
+            return start;
+        }
     }//end Time
 
 }//end namespace System

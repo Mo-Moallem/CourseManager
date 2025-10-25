@@ -101,7 +101,7 @@ namespace CourseManager
                 }
 
                 
-                DisplayResults(GetDayName(day), courses, 3, 4);
+                DisplayResults(GetDayName(day), courses, 3, 4,currentSections);
 
                 // Draw the path on the map
                 //panel1.Invalidate(); // Trigger panel1_Paint
@@ -115,7 +115,7 @@ namespace CourseManager
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void DisplayResults(string day, Course[] courses, int numberOfDifBuildings, int totalDistance)
+        private void DisplayResults(string day, Course[] courses, int numberOfDifBuildings, int totalDistance, List<Section> sections)
         {
             var sb = new System.Text.StringBuilder();
 
@@ -127,6 +127,12 @@ namespace CourseManager
             }
             sb.AppendLine($"Number of Different Buildings = {numberOfDifBuildings}");
             sb.AppendLine($"Distance Traveled = {totalDistance}");
+            sb.AppendLine();
+            foreach (var section in sections)
+            {
+                sb.AppendLine($"{section.GetCourse().GetCourseCode()} - {section.GetType()}");
+                
+            }
 
             resultTextBox.Text = sb.ToString();
         }
