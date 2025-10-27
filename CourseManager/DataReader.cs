@@ -26,7 +26,7 @@ namespace CourseManager {
             try
             {
                 Excel.Application xApp = new Excel.Application();
-                Excel.Workbook xWorkBook = xApp.Workbooks.Open(@"C:\Users\moallem\source\repos\CourseManager\CourseManager\Term Schedule 251 - Copy.xlsx");
+                Excel.Workbook xWorkBook = xApp.Workbooks.Open(@"C:\Users\moallem\source\repos\CourseManager\CourseManager\Term Schedule 251.xlsx");
                 Excel.Worksheet xWorksheet = xWorkBook.Worksheets[1];
 
                 Excel.Range usedRng = xWorksheet.UsedRange;
@@ -94,12 +94,8 @@ namespace CourseManager {
             
             
         }
-        // Put these in DataReader (or a utils class)
 
-        // Parse "0800" or Excel OADate (double). Returns false if null/empty/unparseable.
-        
-
-
+       
     }//end DataReader
 
 }//end namespace System

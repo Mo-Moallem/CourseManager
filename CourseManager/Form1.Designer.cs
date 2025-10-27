@@ -54,6 +54,7 @@
             MapPanel.Name = "MapPanel";
             MapPanel.Size = new Size(546, 434);
             MapPanel.TabIndex = 3;
+            MapPanel.Click += MapPanel_Click;
             MapPanel.Paint += MapPanel_Paint;
             // 
             // label2
@@ -164,7 +165,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(872, 487);
+            ClientSize = new Size(868, 483);
             Controls.Add(label3);
             Controls.Add(sundayBtn);
             Controls.Add(resultTextBox);

@@ -103,7 +103,10 @@ namespace CourseManager
                     MapPanel.Invalidate();
                     return;
                 }
+
                 List<Section> sectionsByCrn = sectionsManager.getSectionsByCrn(crns);
+                ValidateSectionsForConflicts(sectionsByCrn);
+
                 List<Section> sectionsByDay = sectionsManager.getSectionsByDay(day, crns, sectionsByCrn);
                 currentSections = sectionsManager.GetSectionsInOrder(crns, sectionsByDay);
 
@@ -128,10 +131,6 @@ namespace CourseManager
                     Point point = building.GetPoint();
                     points.Add(point);
                 }
-                
-
-               
-                
                 
                 Course[] courses = sectionsManager.GetCoursesFromSections(sectionsByCrn);
 
@@ -173,11 +172,6 @@ namespace CourseManager
             sb.AppendLine($"Number of Different Buildings = {numberOfDifBuildings}");
             sb.AppendLine($"Distance Traveled = {totalDistance} m");
             sb.AppendLine();
-            foreach (var section in sections)
-            {
-                sb.AppendLine($"{section.GetCourse().GetCourseCode()} {section.GetTime().GetStart()}");
-                
-            }
 
             resultTextBox.Text = sb.ToString();
         }
@@ -294,5 +288,56 @@ namespace CourseManager
 
             return crns;
         }
+
+        private void MapPanel_Click(object sender, EventArgs e)
+        {
+            if (e is MouseEventArgs mouseArgs)
+            {
+                Point clickPoint = mouseArgs.Location;
+                System.Diagnostics.Debug.WriteLine($"Click at: X={clickPoint.X}, Y={clickPoint.Y}");
+
+
+            }
+        }
+
+        public bool HasTimeConflicts(List<Section> sectionsToCheck)
+        {
+            for (int i = 0; i < sectionsToCheck.Count; i++)
+            {
+                var timeA = sectionsToCheck[i].GetTime();
+                if (timeA == null) continue;
+
+                for (int j = i + 1; j < sectionsToCheck.Count; j++)
+                {
+                    var timeB = sectionsToCheck[j].GetTime();
+                    if (timeB == null) continue;
+
+                    // If both have time and conflict, return true
+                    if (timeA.conflictsWith(timeB))
+                    {
+                        System.Diagnostics.Debug.WriteLine(
+                            $"Conflict detected between CRN {sectionsToCheck[i].GetCrn()} and CRN {sectionsToCheck[j].GetCrn()}");
+                        return true;
+                    }
+                }
+            }
+
+            // No conflicts found
+            return false;
+        }
+
+        public void ValidateSectionsForConflicts(List<Section> sections)
+        {
+            if (HasTimeConflicts(sections))
+            {
+                throw new InvalidOperationException("Time conflict detected between selected sections!");
+            }
+        }
+
+
+
+
     }
+
+
 }
