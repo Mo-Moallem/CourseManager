@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using static CourseManager.TimeParser;
 
 namespace CourseManager
 {
@@ -25,9 +26,8 @@ namespace CourseManager
         {
             buildings["22"] = new Building("22", new Point(370, 320));
             buildings["24"] = new Building("24", new Point(400, 390));
-            buildings["0"] = new Building("0", new Point(240, 240));
             buildings["7"] = new Building("7", new Point(85, 130));
-            buildings["5"] = new Building("5", new Point(120, 105));
+            buildings["5"] = new Building("5", new Point(217, 158));
             buildings["63"] = new Building("63", new Point(120, 50));
             buildings["59"] = new Building("59", new Point(340, 90));
             buildings["4"] = new Building("4", new Point(150, 145));
@@ -108,36 +108,13 @@ namespace CourseManager
 
         }
 
-        private static bool TryParseTime(object? v, out TimeOnly t)
-        {
-            t = default;
-            if (v is null) return false;
-
-            if (v is double d) { t = TimeOnly.FromDateTime(DateTime.FromOADate(d)); return true; }
-
-            var s = Convert.ToString(v)?.Trim();
-            if (string.IsNullOrEmpty(s)) return false;
-
-            // exact "HHmm" like 0800
-            if (s.Length == 4 &&
-                int.TryParse(s.AsSpan(0, 2), out var hh) &&
-                int.TryParse(s.AsSpan(2, 2), out var mm))
-            { t = new TimeOnly(hh, mm); return true; }
-
-            // fallback (e.g., "8:00", "8:00 AM")
-            return TimeOnly.TryParse(s, out t);
-        }
-
-
-
-
         // Build Time? using your rule: if start is null -> null; if end is null -> end = start
         private static Time? BuildTimeOrNull(object? vStart, object? vEnd, string daysString)
         {
-            if (!TryParseTime(vStart, out var start))
+            if (!TimeParser.TryParse(vStart, out var start))
                 return null;
 
-            if (!TryParseTime(vEnd, out var end))
+            if (!TimeParser.TryParse(vEnd, out var end))
                 end = start; // your rule
 
             // If your Time ctor enforces end > start, either relax it or nudge by a minute:
