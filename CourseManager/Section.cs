@@ -49,6 +49,11 @@ namespace CourseManager {
         {
 			return location;
         }
+
+		public int GetSecNo() 
+		{
+			return this.secNo;
+		}
     }//end Section
 
 }//end namespace System

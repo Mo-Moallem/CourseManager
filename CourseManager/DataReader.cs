@@ -16,7 +16,8 @@ using Excel = Microsoft.Office.Interop.Excel;
 namespace CourseManager {
 	public class DataReader {
 
-        public DataReader(){
+        public DataReader()
+        {
 
 		}
 
@@ -25,13 +26,13 @@ namespace CourseManager {
             try
             {
                 Excel.Application xApp = new Excel.Application();
-                Excel.Workbook xWorkBook = xApp.Workbooks.Open(@"C:\Users\s202283440\Source\Repos\CourseManager\CourseManager\Term Schedule 251.xlsx");
+                Excel.Workbook xWorkBook = xApp.Workbooks.Open(@"C:\Users\moallem\source\repos\CourseManager\CourseManager\Term Schedule 251 - Copy.xlsx");
                 Excel.Worksheet xWorksheet = xWorkBook.Worksheets[1];
 
                 Excel.Range usedRng = xWorksheet.UsedRange;
                 int numberOfRows = usedRng.Rows.Count;
 
-                
+
 
                 int row = 2;
 
@@ -52,7 +53,7 @@ namespace CourseManager {
 
                     rng = xWorksheet.Cells[row, 5];
                     string secNoString = (string)rng.Value;
-                    
+
 
                     rng = xWorksheet.Cells[row, 6];
                     string title = (string)rng.Value;
@@ -79,7 +80,7 @@ namespace CourseManager {
                     string? instructor = (string)rng.Value;
 
                     manager.AddSection(term, crn, courseCode, dept, secNoString, title, activity, daysString, vStart, vEnd, buildingNo, roomNo, instructor);
-                  
+
                     row++;
                 }
 
@@ -89,6 +90,7 @@ namespace CourseManager {
             {
                 MessageBox.Show("Error " + ex.StackTrace);
             }
+            
             
             
         }
