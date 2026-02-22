@@ -49,10 +49,9 @@
             MapPanel.BorderStyle = BorderStyle.FixedSingle;
             MapPanel.Controls.Add(label2);
             MapPanel.ImeMode = ImeMode.NoControl;
-            MapPanel.Location = new Point(10, 42);
-            MapPanel.Margin = new Padding(3, 2, 3, 2);
+            MapPanel.Location = new Point(11, 56);
             MapPanel.Name = "MapPanel";
-            MapPanel.Size = new Size(546, 434);
+            MapPanel.Size = new Size(556, 438);
             MapPanel.TabIndex = 3;
             MapPanel.Click += MapPanel_Click;
             MapPanel.Paint += MapPanel_Paint;
@@ -60,35 +59,33 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(99, 152);
+            label2.Location = new Point(113, 203);
             label2.Name = "label2";
-            label2.Size = new Size(0, 15);
+            label2.Size = new Size(0, 20);
             label2.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(10, 7);
+            label1.Location = new Point(11, 9);
             label1.Name = "label1";
-            label1.Size = new Size(157, 15);
+            label1.Size = new Size(195, 20);
             label1.TabIndex = 0;
             label1.Text = "Enter Student CRN Numbers";
             label1.Click += label1_Click;
             // 
             // crnsTextBox
             // 
-            crnsTextBox.Location = new Point(186, 4);
-            crnsTextBox.Margin = new Padding(3, 2, 3, 2);
+            crnsTextBox.Location = new Point(213, 5);
             crnsTextBox.Name = "crnsTextBox";
-            crnsTextBox.Size = new Size(678, 23);
+            crnsTextBox.Size = new Size(774, 27);
             crnsTextBox.TabIndex = 1;
             // 
             // sundayBtn
             // 
-            sundayBtn.Location = new Point(692, 55);
-            sundayBtn.Margin = new Padding(3, 2, 3, 2);
+            sundayBtn.Location = new Point(791, 73);
             sundayBtn.Name = "sundayBtn";
-            sundayBtn.Size = new Size(39, 22);
+            sundayBtn.Size = new Size(45, 29);
             sundayBtn.TabIndex = 5;
             sundayBtn.Text = "T";
             sundayBtn.UseVisualStyleBackColor = true;
@@ -96,10 +93,9 @@
             // 
             // mondayBtn
             // 
-            mondayBtn.Location = new Point(737, 55);
-            mondayBtn.Margin = new Padding(3, 2, 3, 2);
+            mondayBtn.Location = new Point(842, 73);
             mondayBtn.Name = "mondayBtn";
-            mondayBtn.Size = new Size(39, 22);
+            mondayBtn.Size = new Size(45, 29);
             mondayBtn.TabIndex = 5;
             mondayBtn.Text = "W";
             mondayBtn.UseVisualStyleBackColor = true;
@@ -107,10 +103,9 @@
             // 
             // tuesdayBtn
             // 
-            tuesdayBtn.Location = new Point(781, 55);
-            tuesdayBtn.Margin = new Padding(3, 2, 3, 2);
+            tuesdayBtn.Location = new Point(893, 73);
             tuesdayBtn.Name = "tuesdayBtn";
-            tuesdayBtn.Size = new Size(39, 22);
+            tuesdayBtn.Size = new Size(45, 29);
             tuesdayBtn.TabIndex = 5;
             tuesdayBtn.Text = "R";
             tuesdayBtn.UseVisualStyleBackColor = true;
@@ -118,10 +113,9 @@
             // 
             // wednesdayBtn
             // 
-            wednesdayBtn.Location = new Point(648, 55);
-            wednesdayBtn.Margin = new Padding(3, 2, 3, 2);
+            wednesdayBtn.Location = new Point(741, 73);
             wednesdayBtn.Name = "wednesdayBtn";
-            wednesdayBtn.Size = new Size(39, 22);
+            wednesdayBtn.Size = new Size(45, 29);
             wednesdayBtn.TabIndex = 5;
             wednesdayBtn.Text = "M";
             wednesdayBtn.UseVisualStyleBackColor = true;
@@ -129,10 +123,9 @@
             // 
             // trusdayBtn
             // 
-            trusdayBtn.Location = new Point(603, 55);
-            trusdayBtn.Margin = new Padding(3, 2, 3, 2);
+            trusdayBtn.Location = new Point(689, 73);
             trusdayBtn.Name = "trusdayBtn";
-            trusdayBtn.Size = new Size(39, 22);
+            trusdayBtn.Size = new Size(45, 29);
             trusdayBtn.TabIndex = 5;
             trusdayBtn.Text = "U";
             trusdayBtn.UseVisualStyleBackColor = true;
@@ -141,31 +134,30 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(687, 29);
+            label3.Location = new Point(785, 39);
             label3.Name = "label3";
-            label3.Size = new Size(44, 15);
+            label3.Size = new Size(55, 20);
             label3.TabIndex = 6;
             label3.Text = "Results";
             label3.Click += label3_Click;
             // 
             // resultTextBox
             // 
-            resultTextBox.Location = new Point(562, 81);
-            resultTextBox.Margin = new Padding(3, 2, 3, 2);
+            resultTextBox.Location = new Point(573, 108);
             resultTextBox.Name = "resultTextBox";
             resultTextBox.ReadOnly = true;
-            resultTextBox.Size = new Size(302, 398);
+            resultTextBox.Size = new Size(414, 386);
             resultTextBox.TabIndex = 7;
             resultTextBox.Text = "Hello, World!";
             resultTextBox.TextChanged += richTextBox1_TextChanged;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(868, 483);
+            ClientSize = new Size(992, 498);
             Controls.Add(label3);
             Controls.Add(sundayBtn);
             Controls.Add(resultTextBox);
@@ -176,7 +168,6 @@
             Controls.Add(label1);
             Controls.Add(mondayBtn);
             Controls.Add(trusdayBtn);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
