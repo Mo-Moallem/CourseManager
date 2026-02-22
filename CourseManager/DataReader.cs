@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace CourseManager {
@@ -23,76 +24,77 @@ namespace CourseManager {
 
         public static void ReadTo(SectionsManager manager)
         {
+            Excel.Application? xApp = null;
+            Excel.Workbook? xWorkBook = null;
+            Excel.Worksheet? xWorksheet = null;
+            Excel.Range? usedRng = null;
+
             try
             {
-                Excel.Application xApp = new Excel.Application();
-                Excel.Workbook xWorkBook = xApp.Workbooks.Open(@"D:\codes\FullProjects\CourseManager\CourseManager\Term Schedule 251.xlsx");
-                Excel.Worksheet xWorksheet = xWorkBook.Worksheets[1];
-
-                Excel.Range usedRng = xWorksheet.UsedRange;
-                int numberOfRows = usedRng.Rows.Count;
-
-
-
-                int row = 2;
-
-                while (row <= numberOfRows)
+                xApp = new Excel.Application
                 {
+                    ScreenUpdating = false,
+                    DisplayAlerts = false,
+                    Visible = false
+                };
 
-                    Excel.Range rng = xWorksheet.Cells[row, 1];
-                    int term = Convert.ToInt32(rng.Value);
+                xWorkBook = xApp.Workbooks.Open(@"D:\codes\FullProjects\CourseManager\CourseManager\Term Schedule 251.xlsx", ReadOnly: true);
+                xWorksheet = xWorkBook.Worksheets[1];
 
-                    rng = xWorksheet.Cells[row, 2];
-                    int crn = Convert.ToInt32(rng.Value);
+                usedRng = xWorksheet.UsedRange;
+                int numberOfRows = usedRng.Rows.Count;
+                object?[,] allValues = (object?[,])usedRng.Value2;
 
-                    rng = xWorksheet.Cells[row, 3];
-                    string courseCode = (string)rng.Value;
+                for (int row = 2; row <= numberOfRows; row++)
+                {
+                    int term = Convert.ToInt32(allValues[row, 1]);
+                    int crn = Convert.ToInt32(allValues[row, 2]);
+                    string courseCode = Convert.ToString(allValues[row, 3]) ?? string.Empty;
+                    string dept = Convert.ToString(allValues[row, 4]) ?? string.Empty;
+                    string secNoString = Convert.ToString(allValues[row, 5]) ?? string.Empty;
+                    string title = Convert.ToString(allValues[row, 6]) ?? string.Empty;
+                    string activity = Convert.ToString(allValues[row, 7]) ?? string.Empty;
+                    string daysString = Convert.ToString(allValues[row, 8]) ?? string.Empty;
 
-                    rng = xWorksheet.Cells[row, 4];
-                    string dept = (string)rng.Value;
+                    object? vStart = allValues[row, 9];
+                    object? vEnd = allValues[row, 10];
 
-                    rng = xWorksheet.Cells[row, 5];
-                    string secNoString = (string)rng.Value;
-
-
-                    rng = xWorksheet.Cells[row, 6];
-                    string title = (string)rng.Value;
-
-                    rng = xWorksheet.Cells[row, 7];
-                    string activity = (string)rng.Value;
-
-                    rng = xWorksheet.Cells[row, 8];
-                    string daysString = (string)rng.Value;
-
-                    rng = xWorksheet.Cells[row, 9];
-                    string startTimeString = (string)rng.Value;
-
-                    object vStart = ((Excel.Range)xWorksheet.Cells[row, 9]).Value2;
-                    object vEnd = ((Excel.Range)xWorksheet.Cells[row, 10]).Value2;
-
-                    rng = xWorksheet.Cells[row, 11];
-                    string? buildingNo = (string)rng.Value;
-
-                    rng = xWorksheet.Cells[row, 12];
-                    string? roomNo = (string)rng.Value;
-
-                    rng = xWorksheet.Cells[row, 13];
-                    string? instructor = (string)rng.Value;
+                    string? buildingNo = Convert.ToString(allValues[row, 11]);
+                    string? roomNo = Convert.ToString(allValues[row, 12]);
+                    string? instructor = Convert.ToString(allValues[row, 13]);
 
                     manager.AddSection(term, crn, courseCode, dept, secNoString, title, activity, daysString, vStart, vEnd, buildingNo, roomNo, instructor);
-
-                    row++;
                 }
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error " + ex.StackTrace);
             }
-            
-            
-            
+            finally
+            {
+                xWorkBook?.Close(false);
+                xApp?.Quit();
+
+                if (usedRng != null)
+                {
+                    Marshal.ReleaseComObject(usedRng);
+                }
+
+                if (xWorksheet != null)
+                {
+                    Marshal.ReleaseComObject(xWorksheet);
+                }
+
+                if (xWorkBook != null)
+                {
+                    Marshal.ReleaseComObject(xWorkBook);
+                }
+
+                if (xApp != null)
+                {
+                    Marshal.ReleaseComObject(xApp);
+                }
+            }
         }
 
        
