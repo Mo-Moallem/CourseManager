@@ -100,13 +100,13 @@ namespace CourseManager
                 Location? location = GetOrCreateLocation(building, roomNo);
 
                 // Debug logging
-                System.Diagnostics.Debug.WriteLine($"CRN {crn}: vStart={vStart}, vEnd={vEnd}, days={daysString}");
+                //System.Diagnostics.Debug.WriteLine($"CRN {crn}: vStart={vStart}, vEnd={vEnd}, days={daysString}");
 
                 Time? time = BuildTimeOrNull(vStart, vEnd, daysString);
 
                 if (time == null)
                 {
-                    System.Diagnostics.Debug.WriteLine($"WARNING: CRN {crn} has null time! vStart={vStart}, vEnd={vEnd}");
+                    //System.Diagnostics.Debug.WriteLine($"WARNING: CRN {crn} has null time! vStart={vStart}, vEnd={vEnd}");
                 }
 
                 Section section = new Section(crn, course, term, activity, female, secNo, location, time, instructor);
@@ -129,27 +129,27 @@ namespace CourseManager
         // Also update BuildTimeOrNull with better error handling:
         private static Time? BuildTimeOrNull(object? vStart, object? vEnd, string daysString)
         {
-            System.Diagnostics.Debug.WriteLine($"BuildTimeOrNull: vStart type={vStart?.GetType().Name}, value={vStart}");
-            System.Diagnostics.Debug.WriteLine($"BuildTimeOrNull: vEnd type={vEnd?.GetType().Name}, value={vEnd}");
+            //System.Diagnostics.Debug.WriteLine($"BuildTimeOrNull: vStart type={vStart?.GetType().Name}, value={vStart}");
+            //System.Diagnostics.Debug.WriteLine($"BuildTimeOrNull: vEnd type={vEnd?.GetType().Name}, value={vEnd}");
 
             if (!TimeParser.TryParse(vStart, out var start))
             {
-                System.Diagnostics.Debug.WriteLine($"Failed to parse start time: {vStart}");
+                //System.Diagnostics.Debug.WriteLine($"Failed to parse start time: {vStart}");
                 return null;
             }
 
             if (!TimeParser.TryParse(vEnd, out var end))
             {
-                System.Diagnostics.Debug.WriteLine($"Failed to parse end time: {vEnd}, using start time instead");
+                //System.Diagnostics.Debug.WriteLine($"Failed to parse end time: {vEnd}, using start time instead");
                 end = start;
             }
 
-            System.Diagnostics.Debug.WriteLine($"Parsed times: start={start}, end={end}");
+            //System.Diagnostics.Debug.WriteLine($"Parsed times: start={start}, end={end}");
 
             // Check if times are equal (which would cause the exception)
             if (end <= start)
             {
-                System.Diagnostics.Debug.WriteLine($"WARNING: end <= start, adjusting end time by 1 minute");
+                //System.Diagnostics.Debug.WriteLine($"WARNING: end <= start, adjusting end time by 1 minute");
                 end = start.AddMinutes(1);
             }
 
