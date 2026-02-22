@@ -12,6 +12,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace CourseManager {
@@ -28,6 +29,8 @@ namespace CourseManager {
             Excel.Workbook? xWorkBook = null;
             Excel.Worksheet? xWorksheet = null;
             Excel.Range? usedRng = null;
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             try
             {
@@ -65,9 +68,15 @@ namespace CourseManager {
 
                     manager.AddSection(term, crn, courseCode, dept, secNoString, title, activity, daysString, vStart, vEnd, buildingNo, roomNo, instructor);
                 }
+
+                stopwatch.Stop();
+                string readDurationMessage = $"Excel file reading completed in {stopwatch.ElapsedMilliseconds} ms.";
+                Debug.WriteLine(readDurationMessage);
+                Console.WriteLine(readDurationMessage);
             }
             catch (Exception ex)
             {
+                stopwatch.Stop();
                 MessageBox.Show("Error " + ex.StackTrace);
             }
             finally
